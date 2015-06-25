@@ -8,9 +8,36 @@
 
 #import <Foundation/Foundation.h>
 
+//You are given 3 classes:
+//
+//Election Manager
+//-Conducts an election.
+//-Controls start of voting
+//
+//Election
+//-Maintains a list of contenders
+//
+//Contender
+//-Represents details about a contender
+//--What is the contender's name?
+//--How many votes has he received?
+//
+//Write a program to simulate an election. Create a class called VotingSimulator. In the main , you are required to do the following:
+//
+//1. Create an Election object, and given the Election a name
+//2. Create a few Contender objects. Add these to the Election object. Make sure that the contender names are distinct!
+//3. Create a ElectionManager object. Ask it to manage the Election object created above.
+//4. Ask the ElectionManager to initiatePolling
+//5. Follow the instructions on the console. After each round of polling you will be asked(within the console) whether you want to continue or not.
+//6. Ask the ElectionManager to displayResults
+
+
 // forward declarations
 @class Contender;
 @class Election;
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 // Contender class
 @interface Contender : NSObject
@@ -22,6 +49,8 @@
 - (NSString *)name;
 
 @end
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 @implementation Contender {
     NSInteger _votesReceived;
@@ -55,6 +84,9 @@
 
 @end
 
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 
 @interface Election : NSObject
 
@@ -71,6 +103,7 @@
 
 @end
 
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 // Election class
 @implementation Election {
@@ -151,6 +184,9 @@
 
 @end
 
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 
 // ElectionManager class
 @interface ElectionManager : NSObject
@@ -161,6 +197,8 @@
 - (BOOL)pollsOpen;
 
 @end
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 @implementation ElectionManager {
     NSMutableArray *_races;
@@ -201,6 +239,9 @@
 
 @end
 
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
 int main(int argc, const char * argv[]) {

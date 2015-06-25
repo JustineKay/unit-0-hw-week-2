@@ -25,6 +25,8 @@
 
 - (BOOL)checkSameCity:(NSString *)city;
 
+- (Person *) haveChild;
+
 @end
 
 @implementation Person {
@@ -58,9 +60,22 @@
 }
 
 - (BOOL)checkSameCity:(NSString *)city {
-    return [_city isEqualToString:city];
-    
+    if ([_city isEqualToString:city]){
+        NSLog(@"Yes");
+        return YES;
+    }else {
+        NSLog(@"No");
+        return NO;
+    }
 }
+
+- (Person *) haveChild {
+    Person *child = [[Person alloc] init];
+    [child setCity:[self city]];
+    [child setPhoneNumber:[self phoneNumber]];
+    return child;
+}
+
 
 @end
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -79,15 +94,18 @@ int main(int argc, const char * argv[]) {
         Person *igor = [[Person alloc]init];
         
         [igor setName:@"Igor"];
-        [igor setCity:@"Cheyenne"];
+        [igor setCity:@"Brooklyn"];
         [igor setPhoneNumber:@"347-517-2345"];
         
         NSLog(@"%@ lives in %@. His phone number is %@.", [igor name], [igor city], [igor phoneNumber]);
         
-//        [[igor city] isEqualToString:[julia city]];
-        NSLog(@"Do %@ and %@ live in the same city? %hhd.", [julia name], [igor name],[julia checkSameCity:[igor city]]);
+        NSLog(@"Do %@ and %@ live in the same city?", [julia name], [igor name]);
+        [julia checkSameCity:[igor city]];
         
+        Person *juliasChild = [julia haveChild];
+        [juliasChild setName: @"ABC"];
         
+        NSLog(@"%@ just had a child and named it %@. Can you believe that??", [julia name], [juliasChild name]);
         
         
     }
