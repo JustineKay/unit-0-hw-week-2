@@ -35,11 +35,13 @@
 // forward declarations
 @class Contender;
 @class Election;
+@class VotingSimulator;
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 // Contender class
+
 @interface Contender : NSObject
 
 - (instancetype)initWithName:(NSString *)name;
@@ -87,6 +89,7 @@
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
+// Election class
 
 @interface Election : NSObject
 
@@ -105,7 +108,6 @@
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-// Election class
 @implementation Election {
     NSString *_electionName;
     NSMutableArray *_listOfContenders;
@@ -241,11 +243,66 @@
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+//Voting Simulator Class
+
+@interface VotingSimulator : NSObject
+
+-(void)simulation: (Election *)e with: (ElectionManager *)eMgr ;
+
+@end
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+@implementation VotingSimulator
+
+-(void)simulation: (Election *)e with: (ElectionManager *)eMgr {
+    [eMgr manage:e];
+    [e displayCandidates];
+    [eMgr initiatePolling];
+    [eMgr displayResults];
+}
+
+@end
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
+        
+        Election *bestArtist2016 = [[Election alloc] init];
+        [bestArtist2016 initWithElectionName:@"Best Artist 2016"];
+        
+        ElectionManager *justine = [[ElectionManager alloc] init];
+        
+        Contender *cindySherman = [[Contender alloc] init];
+        Contender *nanGoldin = [[Contender alloc] init];
+        Contender *vanessaBeecroft = [[Contender alloc] init];
+        
+        [cindySherman initWithName:@"Cindy Sherman"];
+        [nanGoldin initWithName:@"Nan Goldin"];
+        [vanessaBeecroft initWithName:@"Vanessa Beecroft"];
+        
+        [bestArtist2016 addContender:cindySherman];
+        [bestArtist2016 addContender:nanGoldin];
+        [bestArtist2016 addContender:vanessaBeecroft];
+        
+//        [bestArtist2016 displayCandidates];
+//        
+//        [justine manage:bestArtist2016];
+//        
+//        [justine initiatePolling];
+//        
+//        [justine displayResults];
+        
+        //Replaced the commented-out messages above with the voting simulator instance below:
+        
+        VotingSimulator *test = [[VotingSimulator alloc] init];
+        
+        [test simulation:bestArtist2016 with:justine];
         
     }
     return 0;
